@@ -1,0 +1,38 @@
+--增加约束
+
+alter table 表名
+add constraint 约束名 约束类型具体的约束说明
+
+--示例：
+
+--添加主键约束
+
+alter table stuInfo
+
+add constraint PK_stuNo primary key(stuNo)
+
+--添加唯一键约束
+
+alter table stuInfo
+
+add constraint UQ_stuID unique(stuID)
+
+--添加默认约束
+
+alter table stuInfo
+
+add constraint DF_stuAddress default('地址不详') for stuAddress
+
+--添加检查约束
+
+alter table stuInfo
+
+add constraint CK_stuAge check(stuAge between 15 and 40)
+
+--添加外键约束
+
+alter table stuInfo
+
+add constraint FK_stuNo foreign key(stuNo) references stuInfo(stuNo)
+
+ 
