@@ -1,0 +1,20 @@
+-->创建数据库
+create database xscj
+	on
+	primary--数据文件
+	(
+		name="xscj",
+		filename="D:\SQL\xscj.mdf",--创建数据文件并设定路径，后缀名为mdf
+		size=5mb,--初始大小
+		maxsize=50mb,--容量最大值，默认不限制
+		filegrowth=10%--增长幅度，默认按10%增长
+	)
+	log on/日志文件
+	(
+		name="xscj_log",--日志文件+_log
+		filename="D:\SQL\xscj_log.ldf",--创建数据文件并设定路径，后缀名为ldf
+		size=2mb,--初始大小
+		maxsize=5mb--容量最大值，默认不限制
+		filegrowth=1mb--默认按10%增长
+	)
+

@@ -1,0 +1,5 @@
+-->删除数据库
+
+use master--修改数据库的使用状态，否则被删除的数据库正在使用时无法被删除的
+go
+drop database database_name--drop 并指定被删除的库名

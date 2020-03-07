@@ -1,0 +1,10 @@
+--创建表
+
+create table table_name
+(
+	字段1 int/数据类型 constraint constraint_name constraint_type/或者check约束 NULL/空或非空 DEFAULT 0/默认值，这里为0,
+	字段2.....,
+	.....
+	/在最后可以写上表级约束（同时为两个或两个以上字段添加约束）例如
+	constraint constraint_name check(/这里写上约束条件)
+)

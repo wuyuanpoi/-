@@ -1,0 +1,86 @@
+--修改数据库
+
+--概括如下
+alter database name
+{
+	add file<文件选项>...[to filegroup 文件组名]--在文件组中增加数据文件
+	add log file<文件选项>...--增加日志文件
+	remove file 逻辑文件名--*删除数据文件
+	add filegroup 文件组名[...]--增加文件组
+	remove filegroup 文件组--删除文件组
+	modify	file <文件选项>--更改文件属性
+	modify name=新数据库名--更改数据库名称
+	modify filgroup--文件组名
+	{
+		<文件可更新项>
+		default
+		name=新文件组名
+	}--更改文件组属性
+	|set <属性选项>...[with<终止>]--设置数据库属性
+	|collate	排序名--设置数据库排序规则
+}
+
+
+--实例01-修改文件大小和增长方式
+alter database test1
+modify file
+(
+	name="test1_data1",
+	maxsize=100MB,
+	filegrowth=5MB
+)
+
+--实例02-增加和删除数据文件
+
+--增加
+alter database test1
+add file
+(
+	name="test1bak",
+	filename="E:\database\test1bak.ndf",
+	size=5MB,
+	maxsize=100MB,
+	filegrowth=10%
+)
+
+--删除数据文件test1bak
+alter database test1
+remove file "test1bak"
+
+
+--实例03-添加文件组，并且向文件组添加两个数据文件
+
+--增加
+alter database test1
+add filegroup fgroup
+go
+alter database test1
+add file
+(
+	name="test1_fgroup_data1",
+	filename="E:\database\test1_fgroup_data1.ndf",
+	size=10MB,
+	maxsize=unlimited,
+	filegrowth=10%
+),
+(
+	name="test1_fgroup_data2",
+	filename="E:\database\test1_fgroup_data2.ndf",
+	size=10MB,
+	maxsize=unlimited,
+	filegrowth=10%
+)to filegroup fgroup
+
+--删除
+alter database test1
+remove file "test1_fgroup_data1"
+go
+alter database test1
+remove file "test1_fgroup_data2"
+go
+alter database test1
+remove filegroup "fgroup"
+
+！！！需要注意！！！
+1.被删除文件组中的数据文件必须先删除，且不能删除主文件组
+2.go语句不是T-SQL语句，但它是SSMS代码编辑器识别的命令，它向SQL server实例发送当前批语句语句的信号
