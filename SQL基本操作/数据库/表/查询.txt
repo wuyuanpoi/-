@@ -1,0 +1,7 @@
+--查询语句
+
+select [all|distinct]<目标列表达式>[,<目标列表达式>]...
+from <表明|视图名>[,<表明|视图名>]....|(select字句)[as]<别名>
+[where<条件表达式>]
+[group by<列名>[having<条件表达式>]]
+[order by<列名>[asc|desc]]
